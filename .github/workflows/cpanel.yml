@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 2
       # Deploy to cPanel
       - name: FTP-Deploy-Action
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           ftp-server: ${{ secrets.FTP_SERVER }}
           ftp-username: ${{ secrets.FTP_USERNAME }}
