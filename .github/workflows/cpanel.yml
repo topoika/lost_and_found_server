@@ -15,6 +15,6 @@ jobs:
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          ftp-server: ftp.sinetiquetas.mx
-          ftp-username: sinetiquetas@acs.sinetiquetas.mx
-          ftp-password: y4Jg-*A7~f66
+          server: ftp.sinetiquetas.mx
+          username: sinetiquetas@acs.sinetiquetas.mx
+          password: y4Jg-*A7~f66
