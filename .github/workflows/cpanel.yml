@@ -16,5 +16,6 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ftp.sinetiquetas.mx
+          port: 21 
           username: sinetiquetas@acs.sinetiquetas.mx
           password: y4Jg-*A7~f66
