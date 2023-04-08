@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
+            $table->longText('image')->nullable();
             $table->string('password');
             $table->text('api_token')->nullable();
             $table->rememberToken();

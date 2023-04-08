@@ -13,7 +13,13 @@ class Controller extends BaseController
     public function get_users()
     {
         # code...
-        $data = User::all();
+        $data = User::all()->makeHidden(["api_token", "created_at", "updated_at"]);
         return response()->json($data);
     }
+    public function get_user($id)
+    {
+        $data = User::find($id)->makeHidden(["api_token", "created_at", "updated_at"]);
+        return $data;
+    }
+
 }

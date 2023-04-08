@@ -24,6 +24,6 @@ Route::get('/clear', function () {
     Artisan::call('view:clear');
     return "Cleared!";
 });
-Route::get('migrate',function(){
-   Artisan::call('migrate');
+Route::get('migrate', function () {
+    Artisan::call('migrate');
 });

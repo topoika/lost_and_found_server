@@ -15,12 +15,14 @@ class UserController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|string|email',
+            'image' => '',
             'password' => 'required|string|min:6',
         ]);
         $user = User::create([
             'first_name' => $validatedData['first_name'],
             'last_name' => $validatedData['last_name'],
             'email' => $validatedData['email'],
+            'image' => $validatedData['image'],
             'password' => bcrypt($validatedData['password'])
         ]);
         $token = $user->createToken("TOKENPLAINTEXT")->plainTextToken;

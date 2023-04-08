@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LostItem extends Model
+class FoundItem extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -13,8 +13,10 @@ class LostItem extends Model
         "note",
         "description",
         "phone_number",
-        "date_time",
-        "returned",
-        "lost_by",
+        "image",
+        "date_found",
+        "location_found",
+        "current_location",
+        "found_by",
     ];
 }

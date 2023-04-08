@@ -10,16 +10,19 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('lost_items', function (Blueprint $table) {
+        Schema::create('found_items', function (Blueprint $table) {
             $table->id();
             $table->string("name");
             $table->string("note")->default("N/A");
             $table->longText("description")->default("N/A");
             $table->string("phone_number")->nullable();
-            $table->string("date_time")->nullable();
+            $table->string("image")->nullable();
+            $table->string("date_found")->nullable();
+            $table->string("location_found")->nullable();
+            $table->string("current_location")->nullable();
             $table->boolean("returned")->default(false);
-            $table->unsignedBigInteger("lost_by");
-            $table->foreign('lost_by')->references('id')->on('users');
+            $table->unsignedBigInteger("found_by");
+            $table->foreign('found_by')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('lost_items');
+        Schema::dropIfExists('found_items');
     }
 };
