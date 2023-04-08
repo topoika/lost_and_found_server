@@ -14,16 +14,16 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'phone' => 'required|string',
+            'email' => 'required|string|email',
             'password' => 'required|string|min:6',
         ]);
         $user = User::create([
             'first_name' => $validatedData['first_name'],
             'last_name' => $validatedData['last_name'],
-            'phone' => $validatedData['phone'],
+            'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password'])
         ]);
-        $token = $user->createToken(env('APP_KEY'))->plainTextToken;
+        $token = $user->createToken("TOKENPLAINTEXT")->plainTextToken;
         $user->api_token = $token;
         $user->save();
         return response()->json(["success" => true, "data" => $user, "message" => "User register successfully"]);
@@ -31,10 +31,10 @@ class UserController extends Controller
     public function login_user(Request $request)
     {
         $validatedData = $request->validate([
-            'phone' => 'required|string',
+            'email' => 'required|string|email',
             'password' => 'required|string|min:6',
         ]);
-        $user = User::where('phone', $validatedData['phone'])->first();
+        $user = User::where('email', $validatedData['email'])->first();
         if (!$user || !Hash::check($validatedData['password'], $user->password)) {
             return response()->json(["success" => false, "data" => null, 'message' => 'Invalid phone number or password'], 401);
         }

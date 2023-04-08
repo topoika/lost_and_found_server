@@ -11,10 +11,10 @@ jobs:
       - uses: actions/checkout@v2.1.0
         with:
           fetch-depth: 2
-      # Deploy to cPanel
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          ftp-server: ftp.sinetiquetas.mx
-          ftp-username: sinetiquetas@acs.sinetiquetas.mx
-          ftp-password: y4Jg-*A7~f66
+          server: ${{secrets.FTP_SERVER }}
+          port: ${{secrets.FTP_PORT }}
+          username: ${{secrets.FTP_USERNAME }}
+          password: ${{secrets.FTP_PASSWORD }}
