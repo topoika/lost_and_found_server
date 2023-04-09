@@ -22,4 +22,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('lost', [LostItemController::class, 'index']);
 });
 Route::post('register', [UserController::class, 'register_user']);
-Route::post('   ', [UserController::class, 'login_user']);
+Route::post('login', [UserController::class, 'login_user']);

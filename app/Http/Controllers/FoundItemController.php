@@ -40,19 +40,19 @@ class FoundItemController extends Controller
         $image = $request->file('image');
         $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
         $image->storeAs('public/images', $imageName);
-        $foundItem = new FoundItem();
-        $foundItem->name = $validatedData['name'];
-        $foundItem->note = $validatedData['note'];
-        $foundItem->description = $validatedData['description'];
-        $foundItem->phone_number = $validatedData['phone_number'];
-        $foundItem->image = $imageName;
-        $foundItem->date_found = $validatedData['date_found'];
-        $foundItem->location_found = $validatedData['location_found'];
-        $foundItem->current_location = $validatedData['current_location'];
-        $foundItem->found_by = $validatedData['found_by'];
-        $foundItem->save();
-        $foundItem["found_by"] = $this->get_user($foundItem["found_by"]);
-        return response()->json(["success" => true, "data" => $foundItem, "message" => "Found item created successfully"]);
+        $found_item = new FoundItem();
+        $found_item->name = $validatedData['name'];
+        $found_item->note = $validatedData['note'];
+        $found_item->description = $validatedData['description'];
+        $found_item->phone_number = $validatedData['phone_number'];
+        $found_item->image = $imageName;
+        $found_item->date_found = $validatedData['date_found'];
+        $found_item->location_found = $validatedData['location_found'];
+        $found_item->current_location = $validatedData['current_location'];
+        $found_item->found_by = $validatedData['found_by'];
+        $found_item->save();
+        $found_item["found_by"] = $this->get_user($found_item["found_by"]);
+        return response()->json(["success" => true, "data" => $found_item, "message" => "Found item created successfully"]);
     }
 
     /**
@@ -66,7 +66,7 @@ class FoundItemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FoundItem $foundItem)
+    public function show(FoundItem $found_item)
     {
         //
     }
@@ -74,15 +74,19 @@ class FoundItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(FoundItem $foundItem)
+    public function edit($id)
     {
-        //
+        $found_item = FoundItem::findOrFail($id);
+        $found_item->returned = true;
+        $found_item->save();
+        $found_item["found_by"] = $this->get_user($found_item["found_by"]);
+        return response()->json(["success" => true, "data" => $found_item, "message" => "Item updted successfully"]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FoundItem $foundItem)
+    public function update(Request $request, FoundItem $found_item)
     {
         //
     }
@@ -90,7 +94,7 @@ class FoundItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FoundItem $foundItem)
+    public function destroy(FoundItem $found_item)
     {
         //
     }

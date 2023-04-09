@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LostItem;
 use Illuminate\Http\Request;
 
-class LostItemController extends Controller
+class lost_itemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class LostItemController extends Controller
             'returned' => '',
             'lost_by' => 'required|integer',
         ]);
-        $lostItem = LostItem::create([
+        $lost_item = LostItem::create([
             'name' => $validatedData['name'],
             'note' => $validatedData['note'],
             'description' => $validatedData['description'],
@@ -44,8 +44,8 @@ class LostItemController extends Controller
             'returned' => $validatedData['returned'],
             'lost_by' => $validatedData['lost_by'],
         ]);
-        $lostItem["lost_by"] = $this->get_user($lostItem["lost_by"]);
-        return response()->json(["success" => true, "data" => $lostItem, "message" => "Lost item created successfully"]);
+        $lost_item["lost_by"] = $this->get_user($lost_item["lost_by"]);
+        return response()->json(["success" => true, "data" => $lost_item, "message" => "Lost item created successfully"]);
     }
 
     /**
@@ -59,7 +59,7 @@ class LostItemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(LostItem $lostItem)
+    public function show(LostItem $lost_item)
     {
         //
     }
@@ -67,15 +67,19 @@ class LostItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LostItem $lostItem)
+    public function edit($id)
     {
-        //
+        $lost_item = LostItem::findOrFail($id);
+        $lost_item->returned = true;
+        $lost_item->save();
+        $lost_item["lost_by"] = $this->get_user($lost_item["lost_by"]);
+        return response()->json(["success" => true, "data" => $lost_item, "message" => "Item updated successfully"]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, LostItem $lostItem)
+    public function update(Request $request, LostItem $lost_item)
     {
         //
     }
@@ -83,7 +87,7 @@ class LostItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LostItem $lostItem)
+    public function destroy(LostItem $lost_item)
     {
         //
     }

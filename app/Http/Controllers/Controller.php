@@ -21,5 +21,4 @@ class Controller extends BaseController
         $data = User::find($id)->makeHidden(["api_token"]);
         return $data;
     }
-
 }
