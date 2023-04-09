@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LostItem;
 use Illuminate\Http\Request;
 
-class lost_itemController extends Controller
+class LostItemController extends Controller
 {
     public function index()
     {
