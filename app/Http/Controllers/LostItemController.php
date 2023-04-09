@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class lost_itemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data = [];
@@ -20,10 +17,6 @@ class lost_itemController extends Controller
         }
         return response()->json(["success" => true, "data" => $data, "message" => "Lost items retrieved successfully"]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request)
     {
         $validatedData = $request->validate([
@@ -47,26 +40,6 @@ class lost_itemController extends Controller
         $lost_item["lost_by"] = $this->get_user($lost_item["lost_by"]);
         return response()->json(["success" => true, "data" => $lost_item, "message" => "Lost item created successfully"]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(LostItem $lost_item)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $lost_item = LostItem::findOrFail($id);
@@ -75,20 +48,10 @@ class lost_itemController extends Controller
         $lost_item["lost_by"] = $this->get_user($lost_item["lost_by"]);
         return response()->json(["success" => true, "data" => $lost_item, "message" => "Item updated successfully"]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, LostItem $lost_item)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(LostItem $lost_item)
-    {
-        //
+        $lost_item = LostItem::findOrFail($id);
+        $lost_item->delete();
+        return response()->json(["message" => "Item deleted successfully"]);
     }
 }

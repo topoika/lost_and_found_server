@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class FoundItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data = [];
@@ -20,10 +17,6 @@ class FoundItemController extends Controller
         }
         return response()->json(["success" => true, "data" => $data, "message" => "Found items retrieved successfully"]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request)
     {
         $validatedData = $request->validate([
@@ -54,26 +47,6 @@ class FoundItemController extends Controller
         $found_item["found_by"] = $this->get_user($found_item["found_by"]);
         return response()->json(["success" => true, "data" => $found_item, "message" => "Found item created successfully"]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(FoundItem $found_item)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $found_item = FoundItem::findOrFail($id);
@@ -82,20 +55,10 @@ class FoundItemController extends Controller
         $found_item["found_by"] = $this->get_user($found_item["found_by"]);
         return response()->json(["success" => true, "data" => $found_item, "message" => "Item updted successfully"]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, FoundItem $found_item)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(FoundItem $found_item)
-    {
-        //
+        $found_item = FoundItem::findOrFail($id);
+        $found_item->delete();
+        return response()->json(["message" => "Item deleted successfully"]);
     }
 }
