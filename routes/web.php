@@ -27,3 +27,6 @@ Route::get('/clear', function () {
 Route::get('migrate', function () {
     Artisan::call('migrate');
 });
+Route::get('link', function () {
+    Artisan::call('storage:link');
+});
