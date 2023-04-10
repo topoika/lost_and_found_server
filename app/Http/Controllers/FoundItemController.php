@@ -21,7 +21,6 @@ class FoundItemController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string',
-            'note' => '',
             'description' => 'required|string',
             'phone_number' => 'required|string',
             'image' => 'required|image|max:2048',
@@ -35,7 +34,6 @@ class FoundItemController extends Controller
         $image->storeAs('public/images', $imageName);
         $found_item = new FoundItem();
         $found_item->name = $validatedData['name'];
-        $found_item->note = $validatedData['note'];
         $found_item->description = $validatedData['description'];
         $found_item->phone_number = $validatedData['phone_number'];
         $found_item->image = $imageName;

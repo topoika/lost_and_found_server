@@ -13,7 +13,6 @@ return new class extends Migration {
         Schema::create('found_items', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("note")->default("N/A");
             $table->longText("description")->default("N/A");
             $table->string("phone_number")->nullable();
             $table->string("image")->nullable();
