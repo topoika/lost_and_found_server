@@ -2,12 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FoundItem;
+use App\Models\LostItem;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function get_user_items($id)
+    {
+        $lost_data = [];
+        $found_data = [];
+        $lost_items = LostItem::where('lost_by', $id)->get();
+        foreach ($lost_items as $item) {
+            $item["lost_by"] = $this->get_user($item["lost_by"]);
+            array_push($lost_data, $item);
+        }
+        $found_items = FoundItem::where('found_by', $id)->get();
+        foreach ($found_items as $item) {
+            $item["found_by"] = $this->get_user($item["found_by"]);
+            array_push($found_data, $item);
+        }
+        return response()->json(["success" => true, "lost_data" => $lost_data, "found_data" => $found_data, "message" => "User items successfully"]);
+
+    }
 
     public function register_user(Request $request)
     {

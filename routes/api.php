@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('lost/create', [LostItemController::class, 'create']);
     Route::get('lost', [LostItemController::class, 'index']);
+    Route::get('user_items/{id}', [UserController::class, 'get_user_items']);
     Route::put('lost/{id}', [LostItemController::class, 'edit']);
     Route::delete('lost/{id}', [LostItemController::class, 'destroy']);
     Route::post('found/create', [FoundItemController::class, 'create']);
