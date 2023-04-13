@@ -55,8 +55,13 @@ class FoundItemController extends Controller
     }
     public function destroy($id)
     {
-        $found_item = FoundItem::findOrFail($id);
-        $found_item->delete();
-        return response()->json(["message" => "Item deleted successfully"]);
+        try {
+            $found_item = FoundItem::findOrFail($id);
+            $found_item->delete();
+            return response()->json(["message" => "Item deleted successfully"]);
+        } catch (\Throwable $th) {
+            return response()->json(["message" => "Item has already been deleted"]);
+        }
+
     }
 }
