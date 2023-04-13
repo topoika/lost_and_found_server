@@ -45,10 +45,10 @@ class FoundItemController extends Controller
         $found_item["found_by"] = $this->get_user($found_item["found_by"]);
         return response()->json(["success" => true, "data" => $found_item, "message" => "Found item created successfully"]);
     }
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $found_item = FoundItem::findOrFail($id);
-        $found_item->returned = true;
+        $found_item->returned = $request['returned'];
         $found_item->save();
         $found_item["found_by"] = $this->get_user($found_item["found_by"]);
         return response()->json(["success" => true, "data" => $found_item, "message" => "Item updted successfully"]);

@@ -40,10 +40,10 @@ class LostItemController extends Controller
         $lost_item["lost_by"] = $this->get_user($lost_item["lost_by"]);
         return response()->json(["success" => true, "data" => $lost_item, "message" => "Lost item created successfully"]);
     }
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $lost_item = LostItem::findOrFail($id);
-        $lost_item->returned = true;
+        $lost_item->returned = $request['returned'];
         $lost_item->save();
         $lost_item["lost_by"] = $this->get_user($lost_item["lost_by"]);
         return response()->json(["success" => true, "data" => $lost_item, "message" => "Item updated successfully"]);
